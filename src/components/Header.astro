@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/images/logo.png';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { useTranslations } from '../i18n/utils';
+export interface Props { locale?: string; }
+const { locale = 'en' } = Astro.props;
+const t = useTranslations(locale);
+const prefix = locale === 'en' ? '' : `/${locale}`;
+---
+<header class="site-header">
+  <div class="container-1078 header-inner">
+    <a href={`${prefix}/`} class="logo-link" aria-label="Guardino Technologies">
+      <Image src={logo} alt="Guardino Technologies" width={140} height={36} />
+    </a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation" />
+    <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true"><span></span><span></span><span></span></label>
+    <nav class="site-nav" aria-label="Primary">
+      <a href={`${prefix}/about`} class="btn-pill btn-ghost nav-link">{t('nav.about')}</a>
+      <a href={`${prefix}/products`} class="btn-pill btn-ghost nav-link">{t('nav.products')}</a>
+      <a href={`${prefix}/solutions`} class="btn-pill btn-ghost nav-link">{t('nav.solutions')}</a>
+      <a href={`${prefix}/contact`} class="btn-pill btn-ghost nav-link">{t('nav.contact')}</a>
+    </nav>
+    <div class="header-right">
+      <LanguageSwitcher locale={locale} />
+      <a href={`${prefix}/contact`} class="btn-pill btn-gradient">{t('nav.getDemo')}</a>
+    </div>
+  </div>
+</header>
+<style>
+  .site-header { position: sticky; top: 0; z-index: 50; background: rgba(0,0,0,0.6); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 24px; }
+  .site-nav { display: flex; gap: 8px; }
+  .nav-link { font-size: 14px; padding: 8px 18px; }
+  .header-right { display: flex; gap: 12px; align-items: center; }
+  .nav-toggle, .nav-toggle-label { display: none; }
+  @media (max-width: 768px) {
+    .nav-toggle-label { display: flex; flex-direction: column; gap: 4px; cursor: pointer; }
+    .nav-toggle-label span { width: 22px; height: 2px; background: #fff; }
+    .site-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: rgba(0,0,0,0.95); flex-direction: column; padding: 16px; gap: 8px; }
+    .nav-toggle:checked ~ .site-nav { display: flex; }
+    .header-right .btn-gradient { display: none; }
+  }
+</style>

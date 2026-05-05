@@ -1,0 +1,33 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import MarketingLayout from '../../layouts/MarketingLayout.astro';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+type Props = { post: CollectionEntry<'blog'> };
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+<MarketingLayout title={`${post.data.title} — Guardino Technologies`} description={post.data.description}>
+  <article class="container-1078 article">
+    <p class="date">{post.data.pubDate.toISOString().slice(0, 10)} · {post.data.author}</p>
+    <h1>{post.data.title}</h1>
+    <p class="lead">{post.data.description}</p>
+    <div class="prose"><Content /></div>
+  </article>
+</MarketingLayout>
+<style>
+  .article { padding: 120px 24px 96px; max-width: 720px; }
+  .date { color: #6d6d6d; font-size: 13px; margin-bottom: 16px; }
+  .article h1 { font-size: 39px; font-weight: 300; margin-bottom: 16px; line-height: 1.2; }
+  .lead { font-size: 18px; color: #6d6d6d; margin-bottom: 32px; line-height: 1.6; }
+  .prose :global(p) { color: #fff; line-height: 1.7; margin-bottom: 16px; }
+  .prose :global(h2) { font-size: 24px; margin: 32px 0 12px; font-weight: 600; }
+  .prose :global(strong) { color: #a0e0ab; font-weight: 600; }
+  .prose :global(ol), .prose :global(ul) { padding-left: 24px; margin-bottom: 16px; line-height: 1.7; }
+</style>

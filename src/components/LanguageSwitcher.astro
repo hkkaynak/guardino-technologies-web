@@ -1,0 +1,23 @@
+---
+import { locales, localeNames, type Locale } from '../i18n/utils';
+export interface Props { locale?: string; }
+const { locale = 'en' } = Astro.props;
+const path = Astro.url.pathname.replace(/^\/(tr|de|fr|ar)/, '') || '/';
+const currentName = localeNames[(locale as Locale)] ?? 'English';
+---
+<div class="lang-switcher">
+  <button type="button" class="lang-btn" aria-haspopup="true" aria-label="Change language">{currentName}</button>
+  <ul class="lang-menu">
+    {locales.map((l) => (
+      <li><a href={l === 'en' ? path : `/${l}${path === '/' ? '' : path}`}>{localeNames[l]}</a></li>
+    ))}
+  </ul>
+</div>
+<style>
+  .lang-switcher { position: relative; }
+  .lang-btn { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3); border-radius: 75.024px; padding: 6px 14px; font-size: 13px; cursor: pointer; font-family: var(--font-roobert); }
+  .lang-menu { display: none; position: absolute; right: 0; top: 100%; background: rgba(0,0,0,0.9); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 6px; list-style: none; min-width: 140px; }
+  .lang-switcher:hover .lang-menu, .lang-switcher:focus-within .lang-menu { display: block; }
+  .lang-menu a { display: block; padding: 6px 12px; color: #fff; text-decoration: none; font-size: 13px; border-radius: 4px; }
+  .lang-menu a:hover { background: rgba(255,255,255,0.06); }
+</style>

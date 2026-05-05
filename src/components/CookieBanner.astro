@@ -1,0 +1,28 @@
+<div id="cookie-banner" class="cookie-banner" hidden>
+  <p>We use minimal cookies to improve your experience.</p>
+  <div class="cookie-actions">
+    <button type="button" class="btn-pill btn-ghost" data-action="decline">Decline</button>
+    <button type="button" class="btn-pill cookie-accept" data-action="accept">Accept</button>
+  </div>
+</div>
+<script is:inline>
+  (function() {
+    const KEY = 'cookie-consent';
+    if (localStorage.getItem(KEY)) return;
+    const el = document.getElementById('cookie-banner');
+    if (!el) return;
+    el.hidden = false;
+    el.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-action]');
+      if (!btn) return;
+      localStorage.setItem(KEY, btn.dataset.action);
+      el.hidden = true;
+    });
+  })();
+</script>
+<style>
+  .cookie-banner { position: fixed; bottom: 24px; left: 24px; right: 24px; max-width: 540px; margin: 0 auto; background: rgba(24,24,24,0.95); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; backdrop-filter: blur(8px); z-index: 100; }
+  .cookie-banner p { font-size: 13px; color: #fff; flex: 1; min-width: 220px; }
+  .cookie-actions { display: flex; gap: 8px; }
+  .cookie-accept { background: rgba(99,99,99,0.78); border: 1px solid #fff; color: #fff; }
+</style>

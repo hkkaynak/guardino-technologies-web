@@ -1,0 +1,20 @@
+---
+export interface Props { title: string; description: string; href: string; badge?: string; }
+const { title, description, href, badge } = Astro.props;
+---
+<a href={href} class="product-card glass-card">
+  {badge && <span class="badge">{badge}</span>}
+  <h3>{title}</h3>
+  <p>{description}</p>
+  <span class="arrow">→</span>
+</a>
+<style>
+  .product-card { display: block; padding: 34px; text-decoration: none; color: #fff; position: relative; transition: transform 0.2s ease; }
+  .product-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, rgb(160,224,171), rgb(255,172,46), rgb(165,45,37)); border-radius: 10px 10px 0 0; }
+  .product-card:hover { transform: translateY(-2px); }
+  .product-card:hover .arrow { transform: translateX(4px); }
+  .badge { display: inline-block; font-size: 11px; padding: 4px 10px; background: rgba(255,255,255,0.08); border-radius: 999px; margin-bottom: 12px; }
+  .product-card h3 { font-size: 24px; margin-bottom: 8px; font-weight: 600; }
+  .product-card p { color: #6d6d6d; font-size: 15px; line-height: 1.5; margin-bottom: 16px; }
+  .arrow { font-size: 20px; transition: transform 0.2s ease; display: inline-block; }
+</style>

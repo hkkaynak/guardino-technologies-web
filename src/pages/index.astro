@@ -1,0 +1,50 @@
+---
+import MarketingLayout from '../layouts/MarketingLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import ProductCard from '../components/ProductCard.astro';
+import FeatureGrid from '../components/FeatureGrid.astro';
+import StatsBar from '../components/StatsBar.astro';
+import CTABand from '../components/CTABand.astro';
+import { useTranslations } from '../i18n/utils';
+const t = useTranslations('en');
+const trinity = [
+  { title: 'DNS-Layer Threats', desc: '80% of malware uses DNS as a control channel. Block at the source.' },
+  { title: 'Cognitive Manipulation', desc: 'AI-powered disinformation flows through ad networks. We close the door.' },
+  { title: 'Network Sovereignty', desc: 'ISP-level filtering — without surveilling end users.' },
+];
+const steps = [
+  { title: '1. Deploy', desc: 'Point your devices at our DoH/DoT resolver.' },
+  { title: '2. Protect', desc: 'RPZ blocklist engine filters threats in real time.' },
+  { title: '3. Adapt', desc: 'Threat intelligence updates continuously.' },
+];
+---
+<MarketingLayout title={t('meta.home.title')} description={t('meta.home.desc')} locale="en" isHome>
+  <HeroSection headline={t('hero.headline')} sub={t('hero.sub')} cta1={t('hero.cta1')} cta2={t('hero.cta2')} cta1Href="/contact" cta2Href="/products" />
+  <section class="container-1078 trust-strip">
+    <p class="eyebrow">Protecting infrastructure in 30+ countries</p>
+    <div class="logo-row" aria-hidden="true">
+      {[1,2,3,4,5].map(() => <svg viewBox="0 0 120 32" class="logo-rect"><rect x="0" y="0" width="120" height="32" rx="4" fill="rgba(255,255,255,0.06)" /></svg>)}
+    </div>
+  </section>
+  <section class="container-1078 section">
+    <h2 class="section-title">Three Forces. One Defense.</h2>
+    <FeatureGrid items={trinity} />
+  </section>
+  <section class="container-1078 section">
+    <ProductCard title="guardino.ai" description="DNS-Based Cognitive Protection Infrastructure. The flagship product of Guardino Technologies — built for organizations that need to filter threats and manipulation without compromising user privacy." href="/products/guardino-ai" badge="Flagship" />
+  </section>
+  <section class="container-1078 section">
+    <h2 class="section-title">How It Works</h2>
+    <FeatureGrid items={steps} />
+  </section>
+  <StatsBar />
+  <CTABand title="Enterprise-ready. Privacy-first. Deploy in minutes." ctaText="Talk to Sales" ctaHref="/contact" />
+</MarketingLayout>
+<style>
+  .trust-strip { padding: 64px 0; text-align: center; }
+  .eyebrow { color: #6d6d6d; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px; }
+  .logo-row { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; opacity: 0.5; }
+  .logo-rect { height: 32px; width: 120px; }
+  .section { padding: 64px 0; }
+  .section-title { font-size: clamp(28px, 4vw, 39px); font-weight: 300; margin-bottom: 32px; text-align: center; }
+</style>

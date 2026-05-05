@@ -1,0 +1,31 @@
+---
+import MarketingLayout from '../layouts/MarketingLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { useTranslations } from '../i18n/utils';
+const t = useTranslations('en');
+---
+<MarketingLayout title={t('meta.contact.title')} description={t('meta.contact.desc')} locale="en">
+  <section class="container-1078 contact-hero">
+    <h1>{t('contact.title')}</h1>
+    <p class="lead">We respond within 1 business day. <a href="mailto:hello@guardinotechnologies.com">hello@guardinotechnologies.com</a></p>
+  </section>
+  <section class="container-1078 contact-grid">
+    <div class="form-wrap"><ContactForm locale="en" /></div>
+    <aside class="addresses">
+      <div class="glass-card addr"><h4>Istanbul HQ</h4><p>Türkiye</p></div>
+      <div class="glass-card addr"><h4>USA</h4><p>Guardino Technologies LLC</p></div>
+    </aside>
+  </section>
+</MarketingLayout>
+<style>
+  .contact-hero { padding: 120px 0 32px; text-align: center; }
+  .contact-hero h1 { font-size: 54px; font-weight: 300; margin-bottom: 16px; }
+  .lead { color: #6d6d6d; font-size: 16px; }
+  .lead a { color: #a0e0ab; }
+  .contact-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 48px; padding: 48px 24px 96px; align-items: start; }
+  @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
+  .addresses { display: flex; flex-direction: column; gap: 16px; }
+  .addr { padding: 24px; }
+  .addr h4 { margin-bottom: 8px; font-size: 16px; }
+  .addr p { color: #6d6d6d; font-size: 14px; }
+</style>

@@ -1,0 +1,18 @@
+---
+export interface Props { items: { title: string; desc: string }[]; }
+const { items } = Astro.props;
+---
+<div class="feature-grid">
+  {items.map((it) => (
+    <div class="feature glass-card">
+      <h4>{it.title}</h4>
+      <p>{it.desc}</p>
+    </div>
+  ))}
+</div>
+<style>
+  .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .feature { padding: 28px; }
+  .feature h4 { font-size: 18px; margin-bottom: 8px; font-weight: 600; }
+  .feature p { color: #6d6d6d; font-size: 14px; line-height: 1.5; }
+</style>

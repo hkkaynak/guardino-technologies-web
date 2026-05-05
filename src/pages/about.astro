@@ -1,0 +1,56 @@
+---
+import MarketingLayout from '../layouts/MarketingLayout.astro';
+import FeatureGrid from '../components/FeatureGrid.astro';
+import { useTranslations } from '../i18n/utils';
+const t = useTranslations('en');
+const values = [
+  { title: 'Privacy by Design', desc: 'No logs. No telemetry. Encrypted by default.' },
+  { title: 'Zero Surveillance', desc: 'We protect, we do not watch.' },
+  { title: 'Open Standards', desc: 'DoH, DoT, RPZ — interoperable, not proprietary.' },
+];
+const team = [
+  { name: 'Founder & CEO', role: 'Strategy & Vision', gradient: 'linear-gradient(135deg, #a0e0ab, #ffac2e)' },
+  { name: 'CTO', role: 'Infrastructure & Engineering', gradient: 'linear-gradient(135deg, #ffac2e, #a52d25)' },
+  { name: 'Head of Security', role: 'Threat Intelligence', gradient: 'linear-gradient(135deg, #a0e0ab, #a52d25)' },
+];
+---
+<MarketingLayout title={t('meta.about.title')} description={t('meta.about.desc')} locale="en">
+  <section class="container-1078 hero-about">
+    <h1>{t('about.title')}</h1>
+    <p class="lead">{t('about.mission')}</p>
+    <p class="lead">{t('about.vision')}</p>
+  </section>
+  <section class="container-1078 section">
+    <h2 class="section-title">Values</h2>
+    <FeatureGrid items={values} />
+  </section>
+  <section class="container-1078 section">
+    <h2 class="section-title">Company</h2>
+    <p class="company-line">Guardino Technologies LLC — incorporated in the United States, headquartered in Istanbul, Türkiye.</p>
+  </section>
+  <section class="container-1078 section">
+    <h2 class="section-title">Team</h2>
+    <div class="team-grid">
+      {team.map((m) => (
+        <div class="team-card glass-card">
+          <div class="avatar" style={`background: ${m.gradient}`}></div>
+          <h4>{m.name}</h4>
+          <p>{m.role}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+</MarketingLayout>
+<style>
+  .hero-about { padding: 120px 0 64px; text-align: center; }
+  .hero-about h1 { font-size: clamp(36px, 5vw, 54px); font-weight: 300; margin-bottom: 32px; }
+  .lead { font-size: 18px; color: #6d6d6d; max-width: 640px; margin: 0 auto 16px; line-height: 1.6; }
+  .section { padding: 64px 0; }
+  .section-title { font-size: 39px; font-weight: 300; margin-bottom: 32px; text-align: center; }
+  .company-line { text-align: center; color: #6d6d6d; font-size: 16px; }
+  .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .team-card { padding: 28px; text-align: center; }
+  .avatar { width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 16px; }
+  .team-card h4 { font-size: 16px; margin-bottom: 4px; }
+  .team-card p { color: #6d6d6d; font-size: 13px; }
+</style>

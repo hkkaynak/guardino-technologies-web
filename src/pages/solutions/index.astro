@@ -1,0 +1,18 @@
+---
+import MarketingLayout from '../../layouts/MarketingLayout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+---
+<MarketingLayout title="Solutions — Guardino Technologies" description="DNS-layer solutions for enterprises and networks.">
+  <section class="container-1078 section">
+    <h1>Solutions</h1>
+    <div class="cards">
+      <ProductCard title="Enterprise" description="Security without the surveillance tax." href="/solutions/enterprise" />
+      <ProductCard title="Network / ISP" description="Filtering with sovereign data flow." href="/solutions/network" />
+    </div>
+  </section>
+</MarketingLayout>
+<style>
+  .section { padding: 120px 24px 96px; }
+  .section h1 { font-size: 54px; font-weight: 300; margin-bottom: 48px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+</style>

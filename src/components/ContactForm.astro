@@ -1,0 +1,54 @@
+---
+import { useTranslations } from '../i18n/utils';
+export interface Props { locale?: string; }
+const { locale = 'en' } = Astro.props;
+const t = useTranslations(locale);
+---
+<form id="contact-form" class="contact-form" novalidate>
+  <div class="row">
+    <label>{t('contact.form.name')}<input type="text" name="name" required minlength="2" /></label>
+    <label>{t('contact.form.company')}<input type="text" name="company" /></label>
+  </div>
+  <div class="row">
+    <label>{t('contact.form.email')}<input type="email" name="email" required /></label>
+    <label>Country<select name="country">
+      <option value="">—</option><option>Türkiye</option><option>United States</option><option>Germany</option><option>France</option><option>United Kingdom</option><option>Other</option>
+    </select></label>
+  </div>
+  <label>Use Case<select name="useCase">
+    <option value="">—</option><option>Enterprise</option><option>SMB</option><option>ISP</option><option>Government</option><option>Other</option>
+  </select></label>
+  <label>{t('contact.form.message')}<textarea name="message" rows="5" required minlength="10"></textarea></label>
+  <button type="submit" class="btn-pill btn-gradient">{t('contact.form.submit')}</button>
+  <p class="form-status" role="status" aria-live="polite"></p>
+</form>
+<script is:inline>
+  (function() {
+    const f = document.getElementById('contact-form');
+    if (!f) return;
+    const status = f.querySelector('.form-status');
+    f.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.textContent = 'Sending…';
+      status.style.color = '#6d6d6d';
+      const data = Object.fromEntries(new FormData(f).entries());
+      try {
+        const r = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+        const j = await r.json();
+        if (j.ok) { status.textContent = 'Thanks — we will reply within 1 business day.'; status.style.color = '#a0e0ab'; f.reset(); }
+        else { status.textContent = 'Something went wrong. Please email hello@guardinotechnologies.com'; status.style.color = '#ffac2e'; }
+      } catch { status.textContent = 'Network error. Please try again.'; status.style.color = '#a52d25'; }
+    });
+  })();
+</script>
+<style>
+  .contact-form { display: flex; flex-direction: column; gap: 16px; max-width: 640px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .row { grid-template-columns: 1fr; } }
+  label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: #6d6d6d; }
+  input, select, textarea { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 10px 14px; border-radius: 8px; font-family: inherit; font-size: 14px; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: rgba(160,224,171,0.6); }
+  textarea { resize: vertical; }
+  button { align-self: flex-start; }
+  .form-status { font-size: 13px; min-height: 18px; }
+</style>

@@ -1,0 +1,18 @@
+---
+import MarketingLayout from '../../layouts/MarketingLayout.astro';
+import HeroSection from '../../components/HeroSection.astro';
+import StatsBar from '../../components/StatsBar.astro';
+import CTABand from '../../components/CTABand.astro';
+import { useTranslations, locales } from '../../i18n/utils';
+export const prerender = true;
+export function getStaticPaths() {
+  return locales.filter((l) => l !== 'en').map((l) => ({ params: { locale: l } }));
+}
+const { locale } = Astro.params;
+const t = useTranslations(locale!);
+---
+<MarketingLayout title={t('meta.home.title')} description={t('meta.home.desc')} locale={locale} isHome>
+  <HeroSection headline={t('hero.headline')} sub={t('hero.sub')} cta1={t('hero.cta1')} cta2={t('hero.cta2')} cta1Href={`/${locale}/contact`} cta2Href={`/${locale}/products`} />
+  <StatsBar />
+  <CTABand title={t('hero.headline')} ctaText={t('nav.getDemo')} ctaHref={`/${locale}/contact`} />
+</MarketingLayout>

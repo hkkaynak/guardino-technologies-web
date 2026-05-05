@@ -1,0 +1,24 @@
+---
+const stats = [
+  { big: '99.99%', label: 'Uptime' },
+  { big: '<2ms', label: 'Latency' },
+  { big: '50B+', label: 'Queries/day' },
+  { big: '500K+', label: 'Threats blocked/day' },
+];
+---
+<section class="stats-bar bg-deep-ocean">
+  <div class="container-1078 stats-inner">
+    {stats.map((s) => (
+      <div class="stat">
+        <div class="stat-big">{s.big}</div>
+        <div class="stat-label">{s.label}</div>
+      </div>
+    ))}
+  </div>
+</section>
+<style>
+  .stats-bar { padding: 64px 0; color: #000; }
+  .stats-inner { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 32px; text-align: center; }
+  .stat-big { font-size: 48px; font-weight: 600; line-height: 1; margin-bottom: 8px; }
+  .stat-label { font-size: 14px; opacity: 0.85; }
+</style>

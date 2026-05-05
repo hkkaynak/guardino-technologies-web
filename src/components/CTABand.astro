@@ -1,0 +1,17 @@
+---
+export interface Props { title: string; ctaText: string; ctaHref?: string; }
+const { title, ctaText, ctaHref = '/contact' } = Astro.props;
+---
+<section class="cta-band bg-deep-ocean">
+  <div class="container-1078 cta-inner">
+    <h2>{title}</h2>
+    <a href={ctaHref} class="btn-pill cta-link">{ctaText}</a>
+  </div>
+</section>
+<style>
+  .cta-band { padding: 96px 0; color: #000; }
+  .cta-inner { text-align: center; }
+  .cta-band h2 { font-size: clamp(28px, 4vw, 48px); font-weight: 300; margin-bottom: 32px; line-height: 1.2; }
+  .cta-link { background: rgba(0,0,0,0.85); color: #fff; padding: 14px 36px; }
+  .cta-link:hover { background: #000; }
+</style>

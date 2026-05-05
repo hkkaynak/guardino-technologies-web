@@ -1,0 +1,46 @@
+---
+import MarketingLayout from '../../layouts/MarketingLayout.astro';
+import FeatureGrid from '../../components/FeatureGrid.astro';
+import CTABand from '../../components/CTABand.astro';
+const features = [
+  { title: 'Threat Intelligence DNS', desc: 'Real-time threat feeds from a curated global network.' },
+  { title: 'RPZ Blocklist Engine', desc: 'Response Policy Zones tuned for cognitive threats.' },
+  { title: 'DoH + DoT Support', desc: 'Encrypted DNS-over-HTTPS and DNS-over-TLS.' },
+  { title: 'Real-time Analytics', desc: 'Dashboards for security teams, not user surveillance.' },
+];
+const useCases = [
+  { title: 'Enterprise', desc: 'Internal device protection with AD/Entra ID integration.' },
+  { title: 'ISP', desc: 'Network-level filtering with sovereign data flow.' },
+  { title: 'Parental Control', desc: 'Family-grade protection without app installs.' },
+  { title: 'Government', desc: 'On-prem or sovereign cloud deployment.' },
+];
+---
+<MarketingLayout title="guardino.ai — Guardino Technologies" description="DNS-Based Cognitive Protection Infrastructure.">
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="container-1078 hero-content">
+      <span class="badge">guardino.ai</span>
+      <h1>DNS-Based Cognitive Protection Infrastructure.</h1>
+      <p class="sub">Block what other DNS resolvers cannot see — manipulation, dark patterns, and AI-driven disinformation — at the protocol level.</p>
+    </div>
+  </section>
+  <section class="container-1078 section">
+    <h2>Features</h2>
+    <FeatureGrid items={features} />
+  </section>
+  <section class="container-1078 section">
+    <h2>Use Cases</h2>
+    <FeatureGrid items={useCases} />
+  </section>
+  <CTABand title="See guardino.ai in action." ctaText="Contact Sales" />
+</MarketingLayout>
+<style>
+  .hero { position: relative; padding: 140px 24px 96px; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg, rgb(160,224,171), rgb(255,172,46) 50%, rgb(165,45,37)); opacity: 0.15; }
+  .hero-content { position: relative; max-width: 720px; }
+  .badge { display: inline-block; padding: 6px 14px; background: rgba(255,255,255,0.08); border-radius: 999px; font-size: 12px; margin-bottom: 24px; }
+  .hero h1 { font-size: clamp(36px, 5vw, 54px); font-weight: 300; margin-bottom: 24px; line-height: 1.1; }
+  .sub { color: #6d6d6d; font-size: 18px; line-height: 1.6; }
+  .section { padding: 64px 0; }
+  .section h2 { font-size: 39px; font-weight: 300; margin-bottom: 32px; }
+</style>

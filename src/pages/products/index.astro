@@ -1,0 +1,19 @@
+---
+import MarketingLayout from '../../layouts/MarketingLayout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+---
+<MarketingLayout title="Products — Guardino Technologies" description="DNS security and cognitive protection products.">
+  <section class="container-1078 section">
+    <h1>Products</h1>
+    <p class="lead">Infrastructure-grade tools for the security teams that refuse to compromise.</p>
+    <div class="cards">
+      <ProductCard title="guardino.ai" badge="Flagship" description="DNS-Based Cognitive Protection Infrastructure." href="/products/guardino-ai" />
+    </div>
+  </section>
+</MarketingLayout>
+<style>
+  .section { padding: 120px 24px 96px; }
+  .section h1 { font-size: 54px; font-weight: 300; margin-bottom: 16px; }
+  .lead { color: #6d6d6d; font-size: 18px; margin-bottom: 48px; max-width: 540px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+</style>

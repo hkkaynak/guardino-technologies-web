@@ -1,0 +1,21 @@
+---
+import MarketingLayout from '../../layouts/MarketingLayout.astro';
+import { useTranslations, locales } from '../../i18n/utils';
+export const prerender = true;
+export function getStaticPaths() {
+  return locales.filter((l) => l !== 'en').map((l) => ({ params: { locale: l } }));
+}
+const { locale } = Astro.params;
+const t = useTranslations(locale!);
+---
+<MarketingLayout title={t('meta.about.title')} description={t('meta.home.desc')} locale={locale}>
+  <section class="container-1078 hero-about">
+    <h1>{t('about.title')}</h1>
+    <p class="lead">{t('about.mission')}</p>
+  </section>
+</MarketingLayout>
+<style>
+  .hero-about { padding: 120px 24px; text-align: center; }
+  .hero-about h1 { font-size: clamp(36px, 5vw, 54px); font-weight: 300; margin-bottom: 32px; }
+  .lead { color: #6d6d6d; font-size: 18px; max-width: 640px; margin: 0 auto; line-height: 1.6; }
+</style>

@@ -1,0 +1,27 @@
+---
+export interface Props { headline: string; sub: string; cta1: string; cta2: string; cta1Href?: string; cta2Href?: string; }
+const { headline, sub, cta1, cta2, cta1Href = '/contact', cta2Href = '/products' } = Astro.props;
+---
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="container-1078 hero-content">
+    <h1>{headline}</h1>
+    <p>{sub}</p>
+    <div class="hero-ctas">
+      <a href={cta1Href} class="btn-pill btn-gradient">{cta1}</a>
+      <a href={cta2Href} class="btn-pill btn-ghost">{cta2}</a>
+    </div>
+  </div>
+  <div class="scroll-indicator" aria-hidden="true">↓</div>
+</section>
+<style>
+  .hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg, rgb(160,224,171), rgb(255,172,46) 50%, rgb(165,45,37)); opacity: 0.15; animation: drift 20s ease-in-out infinite alternate; }
+  @keyframes drift { 0% { transform: scale(1) translate(0,0); } 100% { transform: scale(1.05) translate(2%,-2%); } }
+  .hero-content { position: relative; text-align: center; padding: 96px 24px; }
+  .hero-content h1 { font-family: var(--font-roobert); font-weight: 300; font-size: clamp(40px, 7vw, 78px); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 24px; }
+  .hero-content p { color: #6d6d6d; font-size: 18px; max-width: 640px; margin: 0 auto 40px; line-height: 1.6; }
+  .hero-ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .scroll-indicator { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.5); font-size: 24px; animation: bounce 2s ease-in-out infinite; }
+  @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+</style>
