@@ -23,21 +23,27 @@ const t = useTranslations(locale);
   <p class="form-status" role="status" aria-live="polite"></p>
 </form>
 <script is:inline>
-  (function() {
+  // Static-site fallback: opens user's email client with prefilled message.
+  // TODO: replace with Formspree / Web3Forms / custom backend when available.
+  (function () {
     const f = document.getElementById('contact-form');
     if (!f) return;
     const status = f.querySelector('.form-status');
-    f.addEventListener('submit', async (e) => {
+    f.addEventListener('submit', (e) => {
       e.preventDefault();
-      status.textContent = 'Sending…';
-      status.style.color = '#6d6d6d';
-      const data = Object.fromEntries(new FormData(f).entries());
-      try {
-        const r = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
-        const j = await r.json();
-        if (j.ok) { status.textContent = 'Thanks — we will reply within 1 business day.'; status.style.color = '#a0e0ab'; f.reset(); }
-        else { status.textContent = 'Something went wrong. Please email hello@guardinotechnologies.com'; status.style.color = '#ffac2e'; }
-      } catch { status.textContent = 'Network error. Please try again.'; status.style.color = '#a52d25'; }
+      const d = Object.fromEntries(new FormData(f).entries());
+      const subject = `[Contact] ${d.company || d.name || 'Inquiry'}`;
+      const body =
+        `Name: ${d.name || ''}\n` +
+        `Company: ${d.company || ''}\n` +
+        `Email: ${d.email || ''}\n` +
+        `Country: ${d.country || ''}\n` +
+        `Use Case: ${d.useCase || ''}\n\n` +
+        `${d.message || ''}\n`;
+      const url = `mailto:hello@guardinotechnologies.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = url;
+      status.textContent = 'Opening your email app…';
+      status.style.color = '#a0e0ab';
     });
   })();
 </script>

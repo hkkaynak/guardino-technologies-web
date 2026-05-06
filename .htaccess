@@ -1,0 +1,29 @@
+# Guardino Technologies — static site routing
+# Apache/LiteSpeed serves the built dist/ folder transparently as the site root.
+# Keeps repo source in ~/public_html while presenting only built files to the world.
+
+RewriteEngine On
+Options -Indexes
+
+# Hostinger Web Builder internal cache — never expose
+RewriteRule ^\.builds(/|$) - [F,L]
+
+# Block direct access to repo source / config / vcs
+RewriteRule ^(src|scripts|node_modules|\.git|\.astro|\.vscode)(/|$) - [F,L]
+RewriteRule ^(package(-lock)?\.json|tsconfig\.json|astro\.config\.mjs|README\.md|\.npmrc|\.gitignore|\.env|\.env\.example)$ - [F,L]
+
+# Static asset / page → dist/<path>
+RewriteCond %{REQUEST_URI} !^/dist/
+RewriteCond %{DOCUMENT_ROOT}/dist%{REQUEST_URI} -f
+RewriteRule ^(.*)$ dist/$1 [L]
+
+# Pretty URL → dist/<path>/index.html (for /about, /tr, /blog/foo, etc.)
+RewriteCond %{REQUEST_URI} !^/dist/
+RewriteCond %{DOCUMENT_ROOT}/dist%{REQUEST_URI}/index.html -f
+RewriteRule ^(.*?)/?$ dist/$1/index.html [L]
+
+# Site root → dist/index.html
+RewriteRule ^$ dist/index.html [L]
+
+# Custom 404 from Astro build
+ErrorDocument 404 /dist/404.html
