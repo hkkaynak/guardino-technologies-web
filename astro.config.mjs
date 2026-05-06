@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://guardinotechnologies.com',
   output: 'server',
-  adapter: node({ mode: 'standalone' }),
+  adapter: node({ mode: 'standalone', host: true }),
   integrations: [sitemap()],
   vite: { plugins: [tailwindcss()] },
   i18n: {
