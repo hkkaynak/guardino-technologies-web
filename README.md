@@ -38,8 +38,9 @@ ls -la dist/server/entry.mjs   # must exist
 | Application mode | Production |
 | Application root | `domains/guardinotechnologies.com/public_html` |
 | Application URL | `guardinotechnologies.com` |
-| **Application startup file** | **`server.mjs`** ← important, NOT `dist/server/entry.mjs` |
-| Environment variables | (Hostinger auto-sets PORT) |
+| **Output directory** | `dist` |
+| **Application startup file** | **`server.mjs`** (resolves to `dist/server.mjs`, written by postbuild) |
+| Environment variables | (Hostinger auto-sets PORT; HOST is forced inside the wrapper) |
 
 Click **Restart Application**.
 
