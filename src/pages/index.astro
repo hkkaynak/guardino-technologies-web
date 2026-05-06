@@ -1,10 +1,12 @@
 ---
+import { Image } from 'astro:assets';
 import MarketingLayout from '../layouts/MarketingLayout.astro';
 import HeroSection from '../components/HeroSection.astro';
 import ProductCard from '../components/ProductCard.astro';
 import FeatureGrid from '../components/FeatureGrid.astro';
 import StatsBar from '../components/StatsBar.astro';
 import CTABand from '../components/CTABand.astro';
+import logoHero from '../assets/images/logo-hero.png';
 import { useTranslations } from '../i18n/utils';
 const t = useTranslations('en');
 const trinity = [
@@ -19,6 +21,9 @@ const steps = [
 ];
 ---
 <MarketingLayout title={t('meta.home.title')} description={t('meta.home.desc')} locale="en" isHome>
+  <div class="logo-hero-wrap">
+    <Image src={logoHero} alt="Guardino Technologies" width={560} height={560} loading="eager" class="logo-hero" />
+  </div>
   <HeroSection headline={t('hero.headline')} sub={t('hero.sub')} cta1={t('hero.cta1')} cta2={t('hero.cta2')} cta1Href="/contact" cta2Href="/products" />
   <section class="container-1078 trust-strip">
     <p class="eyebrow">Protecting infrastructure in 30+ countries</p>
@@ -41,6 +46,12 @@ const steps = [
   <CTABand title="Enterprise-ready. Privacy-first. Deploy in minutes." ctaText="Talk to Sales" ctaHref="/contact" />
 </MarketingLayout>
 <style>
+  .logo-hero-wrap { display: flex; justify-content: center; padding: 80px 24px 0; }
+  .logo-hero { height: 240px; width: auto; max-width: 90vw; }
+  @media (max-width: 640px) {
+    .logo-hero-wrap { padding: 48px 24px 0; }
+    .logo-hero { height: 180px; }
+  }
   .trust-strip { padding: 64px 0; text-align: center; }
   .eyebrow { color: #6d6d6d; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px; }
   .logo-row { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; opacity: 0.5; }
