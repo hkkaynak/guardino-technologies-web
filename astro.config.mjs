@@ -5,7 +5,23 @@ import tailwindcss from '@tailwindcss/postcss';
 export default defineConfig({
   site: 'https://guardinotechnologies.com',
   output: 'static',
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      i18n: {
+        defaultLocale: 'en',
+        locales: {
+          en: 'en',
+          tr: 'tr',
+          de: 'de',
+          fr: 'fr',
+          ar: 'ar',
+        },
+      },
+      changefreq: 'weekly',
+      priority: 0.7,
+      lastmod: new Date(),
+    }),
+  ],
   vite: {
     css: { postcss: { plugins: [tailwindcss()] } },
   },
