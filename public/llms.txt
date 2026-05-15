@@ -1,0 +1,25 @@
+# Guardino Technologies
+
+> Enterprise-grade DNS security and cognitive protection. Three forces, one defense — securing the digital fabric for organizations that take privacy and uptime seriously.
+
+Guardino Technologies builds DNS-layer security and AI-assisted cognitive protection for enterprises. The platform is privacy-first, deploys in minutes, and combines real-time threat detection, DNS firewalling (RPZ), and DoH/DoT with cognitive analysis of query patterns.
+
+## Core
+
+- [Home](https://guardinotechnologies.com/): Securing the Digital Fabric — product overview and three-force defense model
+- [About](https://guardinotechnologies.com/about): Company, mission, team behind Guardino
+- [Products](https://guardinotechnologies.com/products): DNS security suite, cognitive protection, deployment options
+- [Solutions](https://guardinotechnologies.com/solutions): Industry-specific use cases and enterprise scenarios
+- [Contact](https://guardinotechnologies.com/contact): Request demo, sales contact, support
+
+## Localized
+
+- [Türkçe](https://guardinotechnologies.com/tr): Turkish version
+- [Deutsch](https://guardinotechnologies.com/de): German version
+- [Français](https://guardinotechnologies.com/fr): French version
+- [العربية](https://guardinotechnologies.com/ar): Arabic version
+
+## Optional
+
+- [Sitemap](https://guardinotechnologies.com/sitemap-index.xml): Full URL index for crawlers
+- [robots.txt](https://guardinotechnologies.com/robots.txt): Crawler rules with Cloudflare Content Signals (search=yes, ai-input=yes, ai-train=no)
